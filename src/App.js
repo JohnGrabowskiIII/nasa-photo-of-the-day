@@ -18,19 +18,27 @@ function App() {
   };
 
   // STATE FOR BASE API URL
-  const [nasaUrl] = useState('https://api.nasa.gov/planetary/apod?api_key=qGnLbV1JnhgmlVa8qHCzuFrhIFpdbDGg6J9GXafR&date=2021-04-27');
+  const [nasaUrl] = useState('https://api.nasa.gov/planetary/apod?api_key=qGnLbV1JnhgmlVa8qHCzuFrhIFpdbDGg6J9GXafR');
   // STATE FOR API CALL
-  const [pOTD, setPOTD] = useState([]);
+  const [pOTD, setPOTD] = useState({});
   // STATE FOR DATE OBJECT
   const [callDate, setCallDate] = useState((new Date()));
   // STATE FOR DATE FORM
   const [dateFormValue, setDateFormValue] = useState(initDateFormValue);
 
 
+  // USED IN AXIOS CALL
+  const dateString = () => {
+    const year = callDate.getFullYear();
+    const month = callDate.getMonth() + 1;
+    const day = callDate.getDate();
+    return `&date=${year}-${month}-${day}`
+  }
+
   // USE EFFECT SETS STATE
   // RUNS ON FIRST RENDER AND WHEN DATE CHANGES
   useEffect(() => {
-    axios.get(nasaUrl)
+    axios.get(nasaUrl + dateString())
       .then(res => {
         console.log(res);
         setPOTD(res.data);
@@ -46,6 +54,7 @@ function App() {
   }
 
   const dateSubmitHandler = e => {
+    setCallDate(new Date(dateFormValue.Year, (dateFormValue.Month - 1), dateFormValue.Day));
     setDateFormValue(initDateFormValue);
     e.preventDefault();
   }
@@ -64,19 +73,18 @@ function App() {
       Day:
       <input type='text' name='Day' value={dateFormValue.Day} onChange={dateOnChange} />
     </label>
-    <button onClick={dateSubmitHandler} />
+    <button onClick={dateSubmitHandler}>Go to Date!</button>
+    <button onClick={() => setCallDate(new Date())} >Go to Today!</button>
   </form>
-
-  // DATE CLICKHANDLER
 
   return (
     // DIV SETS WIDTH FOR PAGE
     <div className="App">
       <Photo url={pOTD.url} hdUrl={pOTD.hdurl} mediaType={pOTD.media_type} />
       <InfoBar date={pOTD.date} title={pOTD.title} />
-      <InfoExtended />
       <ImageText info={pOTD.explanation} />
       <DateSetter dateForm={dateForm} />
+      <InfoExtended info={pOTD} />
       <Footer />
     </div>
   );
