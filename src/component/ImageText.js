@@ -1,4 +1,10 @@
 import React from "react";
+import styled from 'styled-components';
+
+const TextDiv = styled.div`
+    width: 70%;
+    border: 1px solid purple;
+`
 
 function ImageText(props) {
 
@@ -9,9 +15,9 @@ return(
     // DIV CONTAINER
     // P TAGS
     // <h1>ImageText component loaded</h1>
-    <div>
+    <TextDiv>
         <p>{info}</p>
-    </div>
+    </TextDiv>
 )
 
 }

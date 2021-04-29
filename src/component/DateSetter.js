@@ -1,4 +1,12 @@
 import React from "react";
+import styled from 'styled-components';
+
+const DateContainer = styled.div`
+    width: 15%;
+    height: auto;
+    border: 1px solid orange;
+    align-self: flex-end;
+`
 
 function DateSetter(props) {
 
@@ -9,9 +17,9 @@ function DateSetter(props) {
 return (
     // RETURN DATE FORM + BUTTON WITH CLICKHANDLER
     // <h1>DateSetter component loaded</h1>
-    <div>
+    <DateContainer>
         {dateForm}
-    </div>
+    </DateContainer>
 )
 
 }

@@ -1,4 +1,19 @@
 import React from "react";
+import styled from 'styled-components';
+
+const ImageDiv = styled.div`
+    width: 100%;
+    height: 500px;
+    border: 3px solid blue;
+`
+
+const Apod = styled.img`
+    display: block;
+    max-width: 100%;
+    height: 100%;
+    margin: 0% auto;
+    object-fit: cover;
+`
 
 function Photo(props) {
 
@@ -10,9 +25,9 @@ function Photo(props) {
     // IMAGE WILL FILL DIV
     // NEEDS DEFAULT ERROR LOAD! ACTIVATES WHEN INVALID DATE IS SUBMITTED
         // 
-        <div>
-            {mediaType === 'image' ? <img src={hdUrl} /> : <iframe src={url} />}
-        </div>
+        <ImageDiv>
+            {mediaType === 'image' ? <Apod src={hdUrl} /> : <iframe src={url} />}
+        </ImageDiv>
     )
 
 }

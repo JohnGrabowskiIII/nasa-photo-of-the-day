@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
+import styled from 'styled-components';
 
 import Photo from './component/Photo.js';
 import InfoBar from './component/InfoBar.js';
@@ -7,6 +8,29 @@ import InfoExtended from './component/InfoExtended.js';
 import ImageText from './component/ImageText.js';
 import DateSetter from './component/DateSetter.js';
 import Footer from './component/Footer.js';
+
+const PageContainer = styled.div`
+  width: 85%;
+  margin: auto;
+  border: 2px solid red;
+`
+const FormLabel = styled.label`
+  color: red;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+
+    input {
+      margin: auto 5px;
+      width: 30px;
+    }
+`
+
+const RowDiv = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+`
 
 function App() {
 
@@ -40,7 +64,6 @@ function App() {
   useEffect(() => {
     axios.get(nasaUrl + dateString())
       .then(res => {
-        console.log(res);
         setPOTD(res.data);
       })
       .catch(err => console.log(err));
@@ -61,32 +84,34 @@ function App() {
 
   // DEFINE DATE FORM
   let dateForm = <form>
-    <label>
+    <FormLabel>
       Year:
       <input type='text' name='Year' value={dateFormValue.Year} onChange={dateOnChange} />
-    </label>
-    <label>
+    </FormLabel>
+    <FormLabel>
       Month:
       <input type='text' name='Month' value={dateFormValue.Month} onChange={dateOnChange} />
-    </label>
-    <label>
+    </FormLabel>
+    <FormLabel>
       Day:
       <input type='text' name='Day' value={dateFormValue.Day} onChange={dateOnChange} />
-    </label>
+    </FormLabel>
     <button onClick={dateSubmitHandler}>Go to Date!</button>
     <button onClick={() => setCallDate(new Date())} >Go to Today!</button>
   </form>
 
   return (
     // DIV SETS WIDTH FOR PAGE
-    <div className="App">
+    <PageContainer>
       <Photo url={pOTD.url} hdUrl={pOTD.hdurl} mediaType={pOTD.media_type} />
       <InfoBar date={pOTD.date} title={pOTD.title} />
-      <ImageText info={pOTD.explanation} />
-      <DateSetter dateForm={dateForm} />
+      <RowDiv>
+        <ImageText info={pOTD.explanation} />
+        <DateSetter dateForm={dateForm} />
+      </RowDiv>
       <InfoExtended info={pOTD} />
       <Footer />
-    </div>
+    </PageContainer>
   );
 }
 
