@@ -9,7 +9,7 @@ const ExpandButton = styled.button`
 `
 
 const InfoBox = styled.div`
-    width: 70%;
+    width: fit-content;
     margin-left: 3%;
     display: ${props => props.expand === true ? 'block' : 'none'};
     height: ${props => props.expand === true ? '130px' : '0px'};
@@ -34,8 +34,8 @@ return (
         <ExpandButton onClick={() => boxExpander()} >Expand</ExpandButton>
         <InfoBox expand={isOpen}>
             <p>Copywrite: {info.copywrite}</p>
-            <p>Url: <a href={info.url} target="_blank" >{info.url}</a></p>
-            <p>HD URL: <a href={info.hdurl} target='_blank' >{info.hdurl}</a></p>
+            <p>Url: <a href={info.url} target="_blank" rel="noopener noreferrer" >{info.url}</a></p>
+            <p>HD URL: <a href={info.hdurl} target='_blank' rel="noopener noreferrer" >{info.hdurl}</a></p>
         </InfoBox>
     </div>
 )
