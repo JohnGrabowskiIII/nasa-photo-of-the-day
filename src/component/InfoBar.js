@@ -4,7 +4,8 @@ import styled from 'styled-components';
 const InfoBarDiv = styled.div`
     border: 3px solid green;
     border-radius: 20%;
-    margin: 10px;
+    margin: 10px auto;
+    width: fit-content;
 `
 
 const TitleText = styled.h1`

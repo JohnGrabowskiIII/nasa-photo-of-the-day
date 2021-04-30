@@ -9,6 +9,17 @@ import ImageText from './component/ImageText.js';
 import DateSetter from './component/DateSetter.js';
 import Footer from './component/Footer.js';
 
+const BackgroundDiv = styled.div`
+  height: 100%
+  width: 100%
+  border: 4px solid green;
+  ${props => props.background === '' ? 'background-color: black;' : `background-image: url(${props.background});`}
+  background-position: center;
+  background-attachment: fixed;
+`  
+  
+
+
 const PageContainer = styled.div`
   width: 85%;
   margin: auto;
@@ -49,6 +60,10 @@ function App() {
   const [callDate, setCallDate] = useState((new Date()));
   // STATE FOR DATE FORM
   const [dateFormValue, setDateFormValue] = useState(initDateFormValue);
+  // STATE FOR EXPANDING INFO BOX
+  const [isOpen, setIsOpen] = useState(false);
+  // STATE FOR BACKGROUND IMAGE
+  const [displayBackground, setDisplayBackground] = useState('')
 
 
   // USED IN AXIOS CALL
@@ -68,6 +83,11 @@ function App() {
       })
       .catch(err => console.log(err));
   }, [callDate]);
+
+  // USE EFFECT DEFINES WHETHER BACKGROUND IS IMAGE OR COLOR
+  useEffect(() => {
+    pOTD.media_type === 'image' ? setDisplayBackground(pOTD.hdurl) : setDisplayBackground('');
+  }, [pOTD])
 
   // DEFINE DATE CHANGE HANDLER
   const dateOnChange = e => {
@@ -102,6 +122,7 @@ function App() {
 
   return (
     // DIV SETS WIDTH FOR PAGE
+    <BackgroundDiv background={displayBackground} >
     <PageContainer>
       <Photo url={pOTD.url} hdUrl={pOTD.hdurl} mediaType={pOTD.media_type} />
       <InfoBar date={pOTD.date} title={pOTD.title} />
@@ -109,9 +130,10 @@ function App() {
         <ImageText info={pOTD.explanation} />
         <DateSetter dateForm={dateForm} />
       </RowDiv>
-      <InfoExtended info={pOTD} />
+      <InfoExtended info={pOTD} isOpen={isOpen} setIsOpen={setIsOpen} />
       <Footer />
     </PageContainer>
+    </BackgroundDiv>
   );
 }
 

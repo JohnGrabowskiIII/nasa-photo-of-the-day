@@ -1,22 +1,28 @@
 import React from "react";
+import styled from 'styled-components';
+
+const InfoBox = styled.div`
+    border: 2px solid blue;
+    display: ${props => props.expand === true ? 'block' : 'none'};
+    height: ${props => props.expand === true ? '130px' : '0px'};
+    transition: 1s
+`
 
 function InfoExtended(props) {
 
-    // PROPS IS FULL API STATE
-    const {info} = props;
-    // FUNCTION TOGGLES EXPAND/CONTRACT TO COMPONENT
-    // ATTACH TO BUTTON
+    const {info, isOpen, setIsOpen} = props;
 
+    // BUTTON CLICK HANDLER
+    const boxExpander = () => setIsOpen(!isOpen);
 
 return (
-    // BUTTON AT THE TOP
-    // DISPLAY MOST API INFO INCLUDING PHOTOGRAPHER AND COPYWRITE
-    // <h1>InfoExtended component loaded</h1>
     <div>
-        <button>Expand</button>
-        <p>Copywrite: {info.copywrite}</p>
-        <p>Url: {info.url}</p>
-        <p>HD URL: {info.hdurl}</p>
+        <button onClick={() => boxExpander()} >Expand</button>
+        <InfoBox expand={isOpen}>
+            <p>Copywrite: {info.copywrite}</p>
+            <p>Url: <a href={info.url} target="_blank" >{info.url}</a></p>
+            <p>HD URL: <a href={info.hdurl} target='_blank' >{info.hdurl}</a></p>
+        </InfoBox>
     </div>
 )
 

@@ -4,6 +4,8 @@ import styled from 'styled-components';
 const TextDiv = styled.div`
     width: 70%;
     border: 1px solid purple;
+    border-radius: 5%;
+    padding: 1%;
 `
 
 function ImageText(props) {

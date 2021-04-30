@@ -5,7 +5,7 @@ const DateContainer = styled.div`
     width: 15%;
     height: auto;
     border: 1px solid orange;
-    align-self: flex-end;
+    align-self: center;
 `
 
 function DateSetter(props) {
