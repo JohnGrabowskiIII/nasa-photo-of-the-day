@@ -3,9 +3,14 @@ import styled from 'styled-components';
 
 const TextDiv = styled.div`
     width: 70%;
-    border: 1px solid purple;
+    background: ${props => props.theme.backgroundColor};
     border-radius: 5%;
     padding: 1%;
+    opacity: ${props => props.theme.opacity};
+
+    * {
+        color: ${props => props.theme.fontColor};
+    }
 `
 
 function ImageText(props) {

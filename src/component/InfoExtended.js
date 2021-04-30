@@ -1,11 +1,26 @@
 import React from "react";
 import styled from 'styled-components';
 
+const ExpandButton = styled.button`
+    display: block;
+    margin: auto;
+    color: ${props => props.theme.buttonFontColor};
+    background-color: ${props => props.theme.buttonBackground};
+`
+
 const InfoBox = styled.div`
-    border: 2px solid blue;
+    width: 70%;
+    margin-left: 3%;
     display: ${props => props.expand === true ? 'block' : 'none'};
     height: ${props => props.expand === true ? '130px' : '0px'};
-    transition: 1s
+    background-color: ${props => props.theme.backgroundColor};
+    opacity: ${props => props.theme.opacity};
+    border-radius: 20px;
+
+    * {
+        color: ${props => props.theme.fontColor};
+        padding: 4px 8px;
+    }
 `
 
 function InfoExtended(props) {
@@ -17,7 +32,7 @@ function InfoExtended(props) {
 
 return (
     <div>
-        <button onClick={() => boxExpander()} >Expand</button>
+        <ExpandButton onClick={() => boxExpander()} >Expand</ExpandButton>
         <InfoBox expand={isOpen}>
             <p>Copywrite: {info.copywrite}</p>
             <p>Url: <a href={info.url} target="_blank" >{info.url}</a></p>

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
-import styled from 'styled-components';
+import styled, {ThemeProvider} from 'styled-components';
 
 import Photo from './component/Photo.js';
 import InfoBar from './component/InfoBar.js';
@@ -8,22 +8,25 @@ import InfoExtended from './component/InfoExtended.js';
 import ImageText from './component/ImageText.js';
 import DateSetter from './component/DateSetter.js';
 import Footer from './component/Footer.js';
+import {solarTheme} from './component/Themes.js';
 
+// IF BACKGROUND IMAGE DOES NOT EXIST (NOT LOADED OR VIDEO) COLOR BLACK OTHERWISE USE PICTURE
 const BackgroundDiv = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100%
   width: 100%
   border: 4px solid green;
   ${props => props.background === '' ? 'background-color: black;' : `background-image: url(${props.background});`}
   background-position: center;
   background-attachment: fixed;
+  background-size: cover;
 `  
-  
-
 
 const PageContainer = styled.div`
   width: 85%;
   margin: auto;
-  border: 2px solid red;
 `
 const FormLabel = styled.label`
   color: red;
@@ -64,6 +67,8 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   // STATE FOR BACKGROUND IMAGE
   const [displayBackground, setDisplayBackground] = useState('')
+  // STATE FOR THEMES
+  const [themes, setThemes] = useState(solarTheme)
 
 
   // USED IN AXIOS CALL
@@ -123,16 +128,18 @@ function App() {
   return (
     // DIV SETS WIDTH FOR PAGE
     <BackgroundDiv background={displayBackground} >
-    <PageContainer>
-      <Photo url={pOTD.url} hdUrl={pOTD.hdurl} mediaType={pOTD.media_type} />
-      <InfoBar date={pOTD.date} title={pOTD.title} />
-      <RowDiv>
-        <ImageText info={pOTD.explanation} />
-        <DateSetter dateForm={dateForm} />
-      </RowDiv>
-      <InfoExtended info={pOTD} isOpen={isOpen} setIsOpen={setIsOpen} />
-      <Footer />
-    </PageContainer>
+      <PageContainer>
+        <ThemeProvider theme={themes}>
+          <Photo url={pOTD.url} hdUrl={pOTD.hdurl} mediaType={pOTD.media_type} />
+          <InfoBar date={pOTD.date} title={pOTD.title} />
+          <RowDiv>
+            <ImageText info={pOTD.explanation} />
+            <DateSetter dateForm={dateForm} />
+          </RowDiv>
+          <InfoExtended info={pOTD} isOpen={isOpen} setIsOpen={setIsOpen} />
+          <Footer />
+        </ThemeProvider>
+      </PageContainer>
     </BackgroundDiv>
   );
 }

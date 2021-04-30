@@ -4,8 +4,20 @@ import styled from 'styled-components';
 const DateContainer = styled.div`
     width: 15%;
     height: auto;
-    border: 1px solid orange;
     align-self: center;
+    background: ${props => props.theme.backgroundColor};
+    border-radius: 10px;
+    opacity: ${props => props.theme.opacity};
+
+    button {
+        color: ${props => props.theme.buttonFontColor};
+        background-color: ${props => props.theme.buttonBackground};
+        margin: 1px 5px;
+    }
+
+    input {
+        color: ${props => props.theme.fontColor};
+    }
 `
 
 function DateSetter(props) {

@@ -2,10 +2,18 @@ import React from "react";
 import styled from 'styled-components';
 
 const InfoBarDiv = styled.div`
-    border: 3px solid green;
+    border: ${props => props.theme.border};
     border-radius: 20%;
     margin: 10px auto;
+    padding 8px;
     width: fit-content;
+    background-color: ${props => props.theme.backgroundColor};
+    opacity: ${props => props.theme.opacity};
+
+    * {
+        color: ${props => props.theme.fontColor}
+    }
+
 `
 
 const TitleText = styled.h1`
