@@ -18,7 +18,6 @@ function Footer() {
 
 
 return (
-    // <h1>Footer component loaded</h1>
     <FooterDiv>
         <h3>Created by: John Grabowski, 2021/04/30</h3>
     </FooterDiv>

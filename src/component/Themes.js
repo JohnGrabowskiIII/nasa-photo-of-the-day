@@ -1,8 +1,7 @@
 export const solarTheme = {
-    backgroundColor: "#fffde8",
+    backgroundColor: "#ffdb59",
     buttonBackground: "#ba6811",
-    fontColor: "#ad2307",
+    fontColor: "#b54905",
     buttonFontColor: "white",
-    borderColor: "#e0b526",
     opacity: 0.8
 }

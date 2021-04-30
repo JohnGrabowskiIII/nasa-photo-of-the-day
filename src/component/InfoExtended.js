@@ -27,7 +27,6 @@ function InfoExtended(props) {
 
     const {info, isOpen, setIsOpen} = props;
 
-    // BUTTON CLICK HANDLER
     const boxExpander = () => setIsOpen(!isOpen);
 
 return (

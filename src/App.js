@@ -46,6 +46,16 @@ const RowDiv = styled.div`
     justify-content: space-around;
 `
 
+const SelectMenu = styled.select`
+    height: 100%;
+    display: flex;
+    flex-flow: column-reverse;
+`
+
+const ThemeOption = styled.option`
+    color: ${props => props.theme.fontColor};
+`
+
 function App() {
 
   // INITIAL DATE FORM VALUES
@@ -126,7 +136,6 @@ function App() {
   </form>
 
   return (
-    // DIV SETS WIDTH FOR PAGE
     <BackgroundDiv background={displayBackground} >
       <PageContainer>
         <ThemeProvider theme={themes}>

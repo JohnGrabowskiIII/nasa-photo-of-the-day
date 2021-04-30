@@ -15,13 +15,9 @@ const TextDiv = styled.div`
 
 function ImageText(props) {
 
-    // PROPS IS STATE PHOTO INFO
     const {info} = props;
 
 return(
-    // DIV CONTAINER
-    // P TAGS
-    // <h1>ImageText component loaded</h1>
     <TextDiv>
         <p>{info}</p>
     </TextDiv>
